@@ -20,4 +20,16 @@ class ExampleTest extends TestCase
             $this->app->version(), $this->response->getContent()
         );
     }
+
+    public function test_sum_endpoint()
+    {
+        $this->json('POST', '/sum',
+            [
+                'n1' => '3',
+                'n2' => '4'
+            ])
+            ->seeJson([
+                'result' => 7,
+            ]);
+    }
 }
