@@ -36,7 +36,8 @@
         "start": [
             "Composer\\Config::disableProcessTimeout",
             "php -S localhost:8000 -t public"
-        ]
+        ],
+        "test": "./vendor/bin/phpunit"
     },
     "config": {
         "optimize-autoloader": true,
