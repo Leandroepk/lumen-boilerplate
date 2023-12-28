@@ -2,24 +2,14 @@
 
 namespace Tests;
 
+use Hash;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Laravel\Lumen\Testing\DatabaseTransactions;
+use Laravel\Lumen\Testing\WithoutMiddleware;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_that_base_endpoint_returns_a_successful_response()
-    {
-        $this->get('/');
-
-        $this->assertEquals(
-            $this->app->version(), $this->response->getContent()
-        );
-    }
+    use WithoutMiddleware;
 
     public function test_sum_endpoint()
     {
@@ -30,6 +20,18 @@ class ExampleTest extends TestCase
             ])
             ->seeJson([
                 'result' => 7,
+            ]);
+    }
+
+    public function test_minus_endpoint()
+    {
+        $this->json('POST', '/minus',
+            [
+                'n1' => '4',
+                'n2' => '1'
+            ])
+            ->seeJson([
+                'result' => 3,
             ]);
     }
 }

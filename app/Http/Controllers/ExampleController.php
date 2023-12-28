@@ -25,10 +25,25 @@ class ExampleController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['errors' => $validator->errors()], 401);
         }
 
         $sum = $request->n1 + $request->n2;
         return ["result" => $sum];
+    }
+
+    public function minus(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'n1' => 'required|integer|min:0',
+            'n2' => 'required|integer|min:0',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 401);
+        }
+
+        $minus = $request->n1 - $request->n2;
+        return ["result" => $minus];
     }
 }

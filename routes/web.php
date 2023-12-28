@@ -1,4 +1,5 @@
 <?php
+use App\Models\User;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -18,3 +19,9 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('/sum', 'ExampleController@sum');
+
+$router->post('/register', 'AuthController@register');
+$router->post('/login', 'AuthController@login');
+$router->group(['middleware' => 'jwt.auth'], function () use ($router) {
+    $router->post('/minus', 'ExampleController@minus');
+});
